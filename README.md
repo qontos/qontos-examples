@@ -1,96 +1,45 @@
-<div align="center">
+# QONTOS Examples
 
-<img src="assets/qontos-logo.png" alt="QONTOS" width="400">
+Hands-on tutorials and runnable examples for the QONTOS quantum computing platform.
 
-### Examples
+## Start Here
 
-**Tutorials, notebooks, and integration examples for the QONTOS platform**
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
-[Notebooks](#notebooks) &middot;
-[Python Examples](#python-examples) &middot;
-[Provider Examples](#provider-examples) &middot;
-[Prerequisites](#prerequisites)
-
-</div>
-
----
-
-## Overview
-
-QONTOS Examples contains hands-on notebooks, tutorials, and runnable sample programs for the QONTOS platform. It is the fastest way to learn the SDK, explore modular execution concepts, and reproduce public benchmark and simulation workflows. All examples use the public QONTOS APIs and are designed to run without access to private infrastructure.
-
-## Prerequisites
-
-```bash
-pip install -r requirements.txt
-```
-
-During the current pre-release phase, the examples install the latest public SDK
-and simulator packages directly from GitHub.
-
-For notebook use:
-
-```bash
-pip install jupyter
-```
-
-## Notebooks
-
-| Notebook | Topic | Qubits | Level |
-|---|---|---|---|
-| [01_hello_qubit.ipynb](notebooks/01_hello_qubit.ipynb) | Your first quantum circuit with QONTOS | 1 | Beginner |
-| [02_bell_state.ipynb](notebooks/02_bell_state.ipynb) | Creating and measuring Bell states | 2 | Beginner |
+| Level | Resource | Description |
+|-------|----------|-------------|
+| Beginner | [Hello Qubit](notebooks/01_hello_qubit.ipynb) | Your first quantum circuit with QONTOS |
+| Beginner | [Bell State](notebooks/02_bell_state.ipynb) | Create and measure entanglement |
+| Intermediate | [Partitioning](notebooks/03_partitioning.ipynb) | Split circuits across modules |
+| Intermediate | [Multi-Backend](notebooks/04_multi_backend.ipynb) | Schedule across providers |
+| Advanced | [VQE Chemistry](notebooks/05_vqe_h2.ipynb) | H2 ground state estimation |
 
 ## Python Examples
 
-### Basic Usage
-
-```
-examples/python/
-├── submit_job.py           # Submit a job to a live QONTOS API endpoint
-├── circuit_normalizer.py   # Normalize circuits from different formats
-├── execution_proof.py      # Generate an offline execution proof end to end
-└── async_client.py         # List recent jobs with the async SDK client
-```
+### Core SDK
+- [`submit_job.py`](examples/python/submit_job.py) — Basic job submission
+- [`async_jobs.py`](examples/python/async_jobs.py) — Async multi-job workflow
+- [`execution_proof.py`](examples/python/execution_proof.py) — Integrity verification
+- [`result_inspection.py`](examples/python/result_inspection.py) — Deep result analysis
 
 ### Partitioning
+- [`greedy_partition.py`](examples/partitioning/greedy_partition.py) — Small circuit partitioning
+- [`spectral_partition.py`](examples/partitioning/spectral_partition.py) — Large circuit partitioning
 
-```
-examples/partitioning/
-├── greedy_partition.py     # Fast partitioning for small circuits
-├── spectral_partition.py   # Graph-based partitioning for large circuits
-```
+### Providers
+- [`local_simulator.py`](examples/providers/local_simulator.py) — Local simulator execution
+- [`ibm_quantum.py`](examples/providers/ibm_quantum.py) — IBM Quantum (requires credentials)
+- [`amazon_braket.py`](examples/providers/amazon_braket.py) — Amazon Braket (requires credentials)
+- [`native_qontos.py`](examples/providers/native_qontos.py) — Future native hardware path
 
-### Provider Integration
+## Prerequisites
 
-```
-examples/providers/
-└── local_simulator.py      # Local Qiskit Aer simulation through qontos-sim
-```
+- Python >= 3.10
+- `pip install qontos` (SDK)
+- `pip install qontos-sim` (for local simulator examples)
+- No quantum hardware access needed for most examples
 
-Additional provider examples will land alongside the public provider surface as
-that package matures.
+## Related Repositories
 
-## Running Examples
-
-```bash
-# Run a Python example
-python examples/python/submit_job.py
-
-# Start a Jupyter notebook
-jupyter notebook notebooks/
-```
-
-## Contributing
-
-We welcome new examples. Please see the [Contributing Guide](https://github.com/qontos/.github/blob/main/CONTRIBUTING.md).
-
-## License
-
-[Apache License 2.0](LICENSE)
-
----
-
-*Built by [Zhyra Quantum Research Institute (ZQRI)](https://zhyra.xyz) — Abu Dhabi, UAE*
+- [qontos](https://github.com/qontos/qontos) — Flagship SDK
+- [qontos-sim](https://github.com/qontos/qontos-sim) — Simulators
+- [qontos-benchmarks](https://github.com/qontos/qontos-benchmarks) — Benchmarks
+- [qontos-research](https://github.com/qontos/qontos-research) — Research papers
