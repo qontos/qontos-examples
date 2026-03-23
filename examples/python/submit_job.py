@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: works now (local simulator)
 """Submit a quantum job to QONTOS.
 
 Demonstrates the full lifecycle of a quantum job submission:

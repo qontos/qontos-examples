@@ -30,12 +30,42 @@ Hands-on tutorials and runnable examples for the QONTOS quantum computing platfo
 - [`amazon_braket.py`](examples/providers/amazon_braket.py) — Amazon Braket (requires credentials)
 - [`native_qontos.py`](examples/providers/native_qontos.py) — Future native hardware path
 
+### Execution Status
+
+| Example | Status | Requirements |
+|---------|--------|-------------|
+| `submit_job.py` | Works now | Local simulator |
+| `circuit_normalization.py` | Works now | Offline |
+| `greedy_partition.py` | Works now | Offline |
+| `spectral_partition.py` | Works now | Offline |
+| `local_simulator.py` | Works now | Local simulator |
+| `async_jobs.py` | Requires server | Running QONTOS API |
+| `execution_proof.py` | Requires server | Running QONTOS API |
+| `result_inspection.py` | Requires server | Running QONTOS API |
+| `ibm_quantum.py` | Requires credentials | IBM Quantum account |
+| `amazon_braket.py` | Requires credentials | AWS account |
+| `native_qontos.py` | Future path | Native hardware (in development) |
+
 ## Prerequisites
 
 - Python >= 3.10
-- `pip install qontos` (SDK)
-- `pip install qontos-sim` (for local simulator examples)
-- No quantum hardware access needed for most examples
+
+### Installation (pre-release)
+
+The QONTOS packages are not yet published to PyPI. Install directly from GitHub:
+
+```bash
+pip install git+https://github.com/qontos/qontos.git@main
+pip install git+https://github.com/qontos/qontos-sim.git@main
+```
+
+Or install all example dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+> **Note**: Once packages are published to PyPI, installation will simplify to `pip install qontos qontos-sim`.
 
 ## Related Repositories
 

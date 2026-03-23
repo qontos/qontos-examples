@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: future path (native hardware in development)
 """Execute circuits on native QONTOS modular quantum hardware.
 
 NOTE: Native QONTOS hardware is currently in development. This example
@@ -24,14 +25,14 @@ from qontos import QontosClient
 # 1. Initialize the QONTOS client
 # ---------------------------------------------------------------------------
 # Same client initialization as every other example. The only difference
-# is the backend_config at submission time.
+# is the constraints at submission time.
 client = QontosClient(
     base_url=os.getenv("QONTOS_BASE_URL", "http://localhost:8000"),
     api_key=os.getenv("QONTOS_API_KEY", "demo"),
 )
 
 # ---------------------------------------------------------------------------
-# 2. Configure native QONTOS backend
+# 2. Configure native QONTOS backend constraints
 # ---------------------------------------------------------------------------
 # When native hardware is available, target it by specifying the provider.
 # The QONTOS platform will:
@@ -41,7 +42,7 @@ client = QontosClient(
 #   - Stitch results together with full execution proofs
 #
 # No changes to your code are needed -- same API, different backend.
-native_config = {
+native_constraints = {
     "provider": "qontos_native",
     # Future options may include:
     # "module_topology": "linear",       # Physical module arrangement
@@ -81,7 +82,7 @@ job = client.submit_job(
     circuit=ghz3_qasm,
     shots=4096,
     name="Native QONTOS Demo",
-    backend_config=native_config,
+    constraints=native_constraints,
     tags={"source": "qontos-examples", "provider": "qontos_native"},
 )
 print(f"  Job ID : {job.id}")

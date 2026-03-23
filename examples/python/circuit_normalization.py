@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: works now (offline)
 """Normalize quantum circuits with QONTOS CircuitNormalizer.
 
 Shows how QONTOS converts raw OpenQASM into a provider-agnostic

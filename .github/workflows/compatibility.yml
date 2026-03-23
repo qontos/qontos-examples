@@ -1,0 +1,89 @@
+name: Cross-Repo Compatibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '23 6 * * 1'  # Weekly Monday 6:23 UTC
+
+jobs:
+  compatibility:
+    name: SDK + Sim + Examples Compatibility
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout examples
+        uses: actions/checkout@v4
+
+      - name: Checkout SDK
+        uses: actions/checkout@v4
+        with:
+          repository: qontos/qontos
+          path: _qontos
+
+      - name: Checkout simulator
+        uses: actions/checkout@v4
+        with:
+          repository: qontos/qontos-sim
+          path: _qontos-sim
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install SDK and simulator from source
+        run: |
+          python -m pip install --upgrade pip
+          pip install ./_qontos
+          pip install ./_qontos-sim
+          pip install jupyter qiskit qiskit-aer
+
+      - name: Verify imports work together
+        run: |
+          python -c "
+          import qontos
+          import qontos_sim
+          from qontos import QontosClient, CircuitIR, PartitionPlan
+          from qontos.circuit.normalizer import CircuitNormalizer
+          from qontos.partitioning.partition import Partitioner
+          from qontos.scheduling.scheduler import Scheduler
+          from qontos.integrity.hashing import ExecutionHasher
+          from qontos_sim.local import LocalSimulatorExecutor
+          print(f'qontos {qontos.__version__}')
+          print(f'qontos_sim {qontos_sim.__version__}')
+          print('All cross-package imports OK')
+          "
+
+      - name: Run offline examples
+        run: |
+          python examples/partitioning/greedy_partition.py
+          python examples/partitioning/spectral_partition.py
+          python examples/providers/local_simulator.py
+
+      - name: Verify example API contract alignment
+        run: |
+          python -c "
+          import inspect
+          from qontos import QontosClient
+
+          # Verify submit_job signature matches what examples use
+          sig = inspect.signature(QontosClient.submit_job)
+          params = list(sig.parameters.keys())
+
+          # Examples use: circuit, shots, name, constraints, tags
+          required_params = ['circuit', 'shots', 'constraints', 'name', 'tags']
+          for p in required_params:
+              assert p in params, f'submit_job missing expected param: {p}'
+
+          # Examples must NOT use: backend_config (was the bug in QGH-3102)
+          assert 'backend_config' not in params, 'backend_config should not exist in submit_job'
+
+          print('API contract alignment verified')
+          print(f'submit_job params: {params}')
+          "

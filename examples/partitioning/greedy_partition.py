@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: works now (offline)
 """Partition a quantum circuit using the Greedy strategy.
 
 The GreedyPartitioner grows partitions outward from high-degree seed

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: requires credentials (IBM Quantum account)
 """Execute circuits on IBM Quantum via QONTOS (requires IBM credentials).
 
 This example demonstrates how to configure and use an IBM Quantum backend
@@ -35,18 +36,18 @@ client = QontosClient(
 )
 
 # ---------------------------------------------------------------------------
-# 2. Configure IBM backend preferences
+# 2. Configure IBM backend constraints
 # ---------------------------------------------------------------------------
 # QONTOS routes jobs to IBM Quantum when you specify the provider.
 # The platform handles transpilation, queue management, and result retrieval.
-ibm_config = {
+ibm_constraints = {
     "provider": "ibm_quantum",
     "ibm_api_token": os.getenv("IBMQ_API_TOKEN"),
     # Optional: specify a particular backend
     # "backend_name": "ibm_brisbane",
 }
 
-if not ibm_config["ibm_api_token"]:
+if not ibm_constraints["ibm_api_token"]:
     print("WARNING: IBMQ_API_TOKEN not set. Job submission will fail.")
     print("Set the environment variable or use local_simulator.py instead.")
 
@@ -72,7 +73,7 @@ job = client.submit_job(
     circuit=bell_qasm,
     shots=4096,
     name="IBM Quantum Demo",
-    backend_config=ibm_config,
+    constraints=ibm_constraints,
     tags={"source": "qontos-examples", "provider": "ibm_quantum"},
 )
 print(f"  Job ID : {job.id}")

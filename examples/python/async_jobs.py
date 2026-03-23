@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: requires running QONTOS API server
 """Asynchronous job submission and polling with QONTOS.
 
 Demonstrates how to use the AsyncQontosClient to submit multiple quantum

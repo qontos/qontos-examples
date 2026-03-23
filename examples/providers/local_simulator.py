@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: works now (local simulator)
 """Execute a circuit on the QONTOS local simulator.
 
 The LocalSimulatorExecutor wraps Qiskit Aer and implements the QONTOS

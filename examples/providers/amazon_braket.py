@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: requires credentials (AWS account)
 """Execute circuits on Amazon Braket via QONTOS (requires AWS credentials).
 
 This example demonstrates how to configure and use an Amazon Braket backend
@@ -35,12 +36,12 @@ client = QontosClient(
 )
 
 # ---------------------------------------------------------------------------
-# 2. Configure Amazon Braket backend preferences
+# 2. Configure Amazon Braket backend constraints
 # ---------------------------------------------------------------------------
 # QONTOS routes jobs to Amazon Braket when you specify the provider.
 # The platform handles circuit translation to Braket's format, queue
 # management, and result retrieval.
-braket_config = {
+braket_constraints = {
     "provider": "amazon_braket",
     "aws_region": os.getenv("AWS_DEFAULT_REGION", "us-east-1"),
     # Optional: specify a particular device
@@ -75,7 +76,7 @@ job = client.submit_job(
     circuit=bell_qasm,
     shots=4096,
     name="Amazon Braket Demo",
-    backend_config=braket_config,
+    constraints=braket_constraints,
     tags={"source": "qontos-examples", "provider": "amazon_braket"},
 )
 print(f"  Job ID : {job.id}")

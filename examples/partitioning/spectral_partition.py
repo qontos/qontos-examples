@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: works now (offline)
 """Spectral partitioning for large circuits.
 
 The SpectralPartitioner uses the Fiedler vector of the circuit's graph

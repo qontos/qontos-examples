@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: requires running QONTOS API server
 """Generate an execution proof for a local, single-partition workflow.
 
 This example stays fully offline. It walks through the same logical stages the

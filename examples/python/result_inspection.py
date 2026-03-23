@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Status: requires running QONTOS API server
 """Deep inspection of QONTOS run results.
 
 Demonstrates how to submit a quantum job and perform detailed inspection
