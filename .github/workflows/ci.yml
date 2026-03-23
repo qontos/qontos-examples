@@ -95,6 +95,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install nbconvert nbformat
+      - name: Check notebook install parity with README
+        run: bash .github/scripts/check-notebook-install-parity.sh .
+
       - name: Validate notebook JSON structure
         run: |
           python -c "
