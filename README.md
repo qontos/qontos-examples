@@ -1,6 +1,8 @@
 <div align="center">
 
-# QONTOS Examples
+<img src="assets/qontos-logo.png" alt="QONTOS" width="400">
+
+### Examples
 
 **Tutorials, notebooks, and integration examples for the QONTOS platform**
 
@@ -17,7 +19,7 @@
 
 ## Overview
 
-This repository contains hands-on examples for learning and using the QONTOS quantum orchestration platform. All examples use the public [`qontos`](https://github.com/qontos/qontos) SDK.
+QONTOS Examples contains hands-on notebooks, tutorials, and runnable sample programs for the QONTOS platform. It is the fastest way to learn the SDK, explore modular execution concepts, and reproduce public benchmark and simulation workflows. All examples use the public QONTOS APIs and are designed to run without access to private infrastructure.
 
 ## Prerequisites
 
