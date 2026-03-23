@@ -62,8 +62,13 @@ jobs:
 
       - name: Run offline examples
         run: |
+          python examples/python/circuit_normalization.py
+          python examples/python/execution_proof.py
           python examples/partitioning/greedy_partition.py
           python examples/partitioning/spectral_partition.py
+
+      - name: Run local-simulator examples
+        run: |
           python examples/providers/local_simulator.py
 
       - name: Verify example API contract alignment

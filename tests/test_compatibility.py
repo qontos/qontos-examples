@@ -71,17 +71,38 @@ class TestAPIContractAlignment:
 class TestOfflineExamples:
     """Verify offline examples can at least be imported without errors."""
 
-    @pytest.mark.parametrize("module_path", [
-        "examples.partitioning.greedy_partition",
-        "examples.partitioning.spectral_partition",
-    ])
-    def test_example_importable(self, module_path):
+    OFFLINE_EXAMPLES = [
+        "examples/python/circuit_normalization.py",
+        "examples/python/execution_proof.py",
+        "examples/partitioning/greedy_partition.py",
+        "examples/partitioning/spectral_partition.py",
+    ]
+
+    LOCAL_SIMULATOR_EXAMPLES = [
+        "examples/providers/local_simulator.py",
+    ]
+
+    ALL_RUNNABLE = OFFLINE_EXAMPLES + LOCAL_SIMULATOR_EXAMPLES
+
+    @pytest.mark.parametrize("example_path", OFFLINE_EXAMPLES + LOCAL_SIMULATOR_EXAMPLES)
+    def test_example_importable(self, example_path):
         """Example module can be imported (syntax check)."""
-        # We can't actually run them all, but we can check they parse
-        parts = module_path.replace(".", "/") + ".py"
         result = subprocess.run(
-            [sys.executable, "-c", f"import ast; ast.parse(open('{parts}').read())"],
+            [sys.executable, "-c", f"import ast; ast.parse(open('{example_path}').read())"],
             capture_output=True,
             text=True,
         )
-        assert result.returncode == 0, f"Syntax error in {module_path}: {result.stderr}"
+        assert result.returncode == 0, f"Syntax error in {example_path}: {result.stderr}"
+
+    @pytest.mark.parametrize("example_path", OFFLINE_EXAMPLES)
+    def test_offline_example_runs(self, example_path):
+        """Offline example runs successfully without network or server."""
+        result = subprocess.run(
+            [sys.executable, example_path],
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        assert result.returncode == 0, (
+            f"Offline example {example_path} failed:\n{result.stderr}"
+        )

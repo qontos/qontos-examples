@@ -7,35 +7,77 @@ on:
     branches: [main]
 
 jobs:
-  examples:
-    name: Run Python Examples
+  validate-file-tree:
+    name: Validate README file references
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check all referenced files exist
+        run: |
+          set -e
+          MISSING=0
+          while IFS= read -r file; do
+            if [ ! -f "$file" ]; then
+              echo "::error::Missing file referenced in README: $file"
+              MISSING=$((MISSING + 1))
+            fi
+          done <<'EOF'
+          examples/python/submit_job.py
+          examples/python/async_jobs.py
+          examples/python/execution_proof.py
+          examples/python/result_inspection.py
+          examples/python/circuit_normalization.py
+          examples/partitioning/greedy_partition.py
+          examples/partitioning/spectral_partition.py
+          examples/providers/local_simulator.py
+          examples/providers/ibm_quantum.py
+          examples/providers/amazon_braket.py
+          examples/providers/native_qontos.py
+          notebooks/01_hello_qubit.ipynb
+          notebooks/02_bell_state.ipynb
+          notebooks/03_partitioning.ipynb
+          notebooks/04_multi_backend.ipynb
+          notebooks/05_vqe_h2.ipynb
+          EOF
+          if [ "$MISSING" -gt 0 ]; then
+            echo "::error::$MISSING files referenced in README are missing"
+            exit 1
+          fi
+          echo "✓ All README-referenced files exist"
+
+  offline-examples:
+    name: Run Offline Examples
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.11", "3.12"]
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Run circuit normalization example
-        run: python examples/python/circuit_normalization.py
-
-      - name: Run greedy partitioning example
-        run: python examples/partitioning/greedy_partition.py
-
-      - name: Run spectral partitioning example
-        run: python examples/partitioning/spectral_partition.py
-
-      - name: Run local simulator example
-        run: python examples/providers/local_simulator.py
+      - name: Run offline-safe examples
+        run: |
+          echo "=== Offline examples ==="
+          python examples/python/circuit_normalization.py
+          python examples/python/execution_proof.py
+          python examples/partitioning/greedy_partition.py
+          python examples/partitioning/spectral_partition.py
+      - name: Run local-simulator examples
+        run: |
+          echo "=== Local simulator examples ==="
+          python examples/python/submit_job.py
+          python examples/providers/local_simulator.py
+      - name: Syntax-check all remaining examples
+        run: |
+          echo "=== Syntax validation ==="
+          python -m py_compile examples/python/async_jobs.py
+          python -m py_compile examples/python/result_inspection.py
+          python -m py_compile examples/providers/ibm_quantum.py
+          python -m py_compile examples/providers/amazon_braket.py
+          python -m py_compile examples/providers/native_qontos.py
+          echo "✓ All examples pass syntax check"

@@ -34,17 +34,17 @@ Hands-on tutorials and runnable examples for the QONTOS quantum computing platfo
 
 | Example | Status | Requirements |
 |---------|--------|-------------|
-| `submit_job.py` | Works now | Local simulator |
-| `circuit_normalization.py` | Works now | Offline |
-| `greedy_partition.py` | Works now | Offline |
-| `spectral_partition.py` | Works now | Offline |
-| `local_simulator.py` | Works now | Local simulator |
-| `async_jobs.py` | Requires server | Running QONTOS API |
-| `execution_proof.py` | Requires server | Running QONTOS API |
-| `result_inspection.py` | Requires server | Running QONTOS API |
-| `ibm_quantum.py` | Requires credentials | IBM Quantum account |
-| `amazon_braket.py` | Requires credentials | AWS account |
-| `native_qontos.py` | Future path | Native hardware (in development) |
+| `circuit_normalization.py` | ✅ Works now | Offline |
+| `submit_job.py` | ✅ Works now | Local simulator |
+| `execution_proof.py` | ✅ Works now | Offline |
+| `greedy_partition.py` | ✅ Works now | Offline |
+| `spectral_partition.py` | ✅ Works now | Offline |
+| `local_simulator.py` | ✅ Works now | Local simulator |
+| `async_jobs.py` | 🔧 Requires server | Running QONTOS API |
+| `result_inspection.py` | 🔧 Requires server | Running QONTOS API |
+| `ibm_quantum.py` | 🔑 Requires credentials | IBM Quantum account |
+| `amazon_braket.py` | 🔑 Requires credentials | AWS account |
+| `native_qontos.py` | 🔮 Future path | Native hardware (in development) |
 
 ## Prerequisites
 
