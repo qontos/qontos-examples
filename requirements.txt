@@ -1,2 +1,5 @@
-qontos>=0.1.0
+git+https://github.com/qontos/qontos.git@main
+git+https://github.com/qontos/qontos-sim.git@main
 jupyter>=1.0
+qiskit>=1.0
+qiskit-aer>=0.13

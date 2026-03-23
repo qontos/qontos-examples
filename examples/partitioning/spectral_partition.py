@@ -12,10 +12,9 @@ Usage:
     python spectral_partition.py
 """
 
-from qontos.services.circuit_ingest.normalizer import CircuitNormalizer
-from qontos.services.partitioner.partition import Partitioner
-from qontos.services.partitioner.models import (
-    PartitionConstraints,
+from qontos.circuit import CircuitNormalizer
+from qontos.partitioning import Partitioner, PartitionConstraints
+from qontos.partitioning.models import (
     PartitionStrategy,
 )
 

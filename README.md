@@ -24,16 +24,16 @@ QONTOS Examples contains hands-on notebooks, tutorials, and runnable sample prog
 ## Prerequisites
 
 ```bash
-pip install qontos
-pip install jupyter  # for notebooks
+pip install -r requirements.txt
 ```
 
-For provider-specific examples:
+During the current pre-release phase, the examples install the latest public SDK
+and simulator packages directly from GitHub.
+
+For notebook use:
 
 ```bash
-pip install "qontos[ibm]"      # IBM Quantum
-pip install "qontos[braket]"   # Amazon Braket
-pip install "qontos[all]"      # Everything
+pip install jupyter
 ```
 
 ## Notebooks
@@ -42,9 +42,6 @@ pip install "qontos[all]"      # Everything
 |---|---|---|---|
 | [01_hello_qubit.ipynb](notebooks/01_hello_qubit.ipynb) | Your first quantum circuit with QONTOS | 1 | Beginner |
 | [02_bell_state.ipynb](notebooks/02_bell_state.ipynb) | Creating and measuring Bell states | 2 | Beginner |
-| [03_circuit_partitioning.ipynb](notebooks/03_circuit_partitioning.ipynb) | Partitioning circuits for modular execution | 5-10 | Intermediate |
-| [04_multi_backend.ipynb](notebooks/04_multi_backend.ipynb) | Running across IBM Quantum and simulators | 3-5 | Intermediate |
-| [05_vqe_chemistry.ipynb](notebooks/05_vqe_chemistry.ipynb) | Variational quantum eigensolver for H2 | 2-4 | Advanced |
 
 ## Python Examples
 
@@ -52,10 +49,10 @@ pip install "qontos[all]"      # Everything
 
 ```
 examples/python/
-├── submit_job.py           # Submit a circuit and get results
+├── submit_job.py           # Submit a job to a live QONTOS API endpoint
 ├── circuit_normalizer.py   # Normalize circuits from different formats
-├── execution_proof.py      # Generate and verify execution proofs
-└── async_client.py         # Asynchronous job submission
+├── execution_proof.py      # Generate an offline execution proof end to end
+└── async_client.py         # List recent jobs with the async SDK client
 ```
 
 ### Partitioning
@@ -64,19 +61,17 @@ examples/python/
 examples/partitioning/
 ├── greedy_partition.py     # Fast partitioning for small circuits
 ├── spectral_partition.py   # Graph-based partitioning for large circuits
-├── manual_partition.py     # User-specified qubit-to-module mapping
-└── partition_analysis.py   # Analyze partition quality metrics
 ```
 
 ### Provider Integration
 
 ```
 examples/providers/
-├── ibm_quantum.py          # IBM Quantum backend execution
-├── amazon_braket.py        # Amazon Braket backend execution
-├── local_simulator.py      # Qiskit Aer local simulation
-└── custom_executor.py      # Building a custom backend executor
+└── local_simulator.py      # Local Qiskit Aer simulation through qontos-sim
 ```
+
+Additional provider examples will land alongside the public provider surface as
+that package matures.
 
 ## Running Examples
 

@@ -11,8 +11,8 @@ Usage:
     python circuit_normalization.py
 """
 
-from qontos.services.circuit_ingest.normalizer import CircuitNormalizer
-from qontos.services.circuit_ingest.metadata import extract_metadata
+from qontos.circuit import CircuitNormalizer
+from qontos.circuit.metadata import extract_metadata
 
 # ---------------------------------------------------------------------------
 # 1. Create the normalizer

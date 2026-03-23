@@ -11,14 +11,14 @@ This example shows:
   - Running a simulation and inspecting counts
 
 Prerequisites:
-    pip install qontos qiskit-aer
+    pip install -r requirements.txt
 
 Usage:
     python local_simulator.py
 """
 
-from qontos.services.circuit_ingest.normalizer import CircuitNormalizer
-from qontos.services.executor_simulator.local import LocalSimulatorExecutor
+from qontos.circuit import CircuitNormalizer
+from qontos_sim.local import LocalSimulatorExecutor
 
 # ---------------------------------------------------------------------------
 # 1. Define and normalize a circuit
@@ -70,17 +70,17 @@ if validation.valid:
     print(f"\n--- Simulation Results ---")
     print(f"  Backend      : {result.backend_name}")
     print(f"  Provider     : {result.provider}")
-    print(f"  Shots        : {result.shots}")
-    print(f"  Elapsed (ms) : {result.elapsed_ms:.2f}")
+    print(f"  Shots        : {result.shots_completed}")
+    print(f"  Elapsed (ms) : {result.execution_time_ms:.2f}")
     print(f"  Counts:")
     for bitstring, count in sorted(result.counts.items()):
-        bar = "#" * int(40 * count / result.shots)
-        pct = 100 * count / result.shots
+        bar = "#" * int(40 * count / result.shots_completed)
+        pct = 100 * count / result.shots_completed
         print(f"    |{bitstring}> : {count:>5}  ({pct:5.1f}%)  {bar}")
 
     # For a Bell state, we expect |00> and |11> each near 50%.
     total_correlated = result.counts.get("00", 0) + result.counts.get("11", 0)
-    correlation_pct = 100 * total_correlated / result.shots
+    correlation_pct = 100 * total_correlated / result.shots_completed
     print(f"\n  Correlated outcomes (|00> + |11>): {correlation_pct:.1f}%")
 
 print("\nDone.")
