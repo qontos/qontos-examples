@@ -116,15 +116,43 @@ jobs:
               sys.exit(1)
           print(f'All {len(list(pathlib.Path(\"notebooks\").glob(\"*.ipynb\")))} notebooks valid')
           "
-      - name: Execute beginner notebooks
+      - name: Execute offline-safe notebooks (hard-fail on error)
         run: |
+          set -e
+          echo "=== Executing 01_hello_qubit ==="
           jupyter nbconvert --to notebook --execute \
             --ExecutePreprocessor.timeout=120 \
             --ExecutePreprocessor.kernel_name=python3 \
             notebooks/01_hello_qubit.ipynb \
-            --output /tmp/01_executed.ipynb 2>&1 || echo "::warning::01_hello_qubit execution failed"
+            --output /tmp/01_executed.ipynb
+
+          echo "=== Executing 02_bell_state ==="
           jupyter nbconvert --to notebook --execute \
             --ExecutePreprocessor.timeout=120 \
             --ExecutePreprocessor.kernel_name=python3 \
             notebooks/02_bell_state.ipynb \
-            --output /tmp/02_executed.ipynb 2>&1 || echo "::warning::02_bell_state execution failed"
+            --output /tmp/02_executed.ipynb
+
+          echo "=== Executing 03_partitioning ==="
+          jupyter nbconvert --to notebook --execute \
+            --ExecutePreprocessor.timeout=120 \
+            --ExecutePreprocessor.kernel_name=python3 \
+            notebooks/03_partitioning.ipynb \
+            --output /tmp/03_executed.ipynb
+
+          echo "✓ All offline-safe notebooks executed successfully"
+
+      - name: Validate remaining notebook metadata
+        run: |
+          python -c "
+          import json, pathlib, sys
+          # Notebooks 04 and 05 use API client / multi-backend features
+          # that require a running server — validate structure only
+          for nb_name in ['04_multi_backend.ipynb', '05_vqe_h2.ipynb']:
+              nb = pathlib.Path('notebooks') / nb_name
+              data = json.loads(nb.read_text())
+              assert data['cells'][0]['cell_type'] == 'markdown', f'{nb_name}: first cell must be markdown'
+              assert len(data['cells']) >= 5, f'{nb_name}: too few cells ({len(data[\"cells\"])})'
+              print(f'  ✓ {nb_name}: structure valid ({len(data[\"cells\"])} cells)')
+          print('Remaining notebooks validated (structure only — require server for execution)')
+          "

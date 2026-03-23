@@ -52,11 +52,11 @@ Hands-on tutorials and runnable examples for the QONTOS quantum computing platfo
 
 ### Installation (pre-release)
 
-The QONTOS packages are not yet published to PyPI. Install directly from GitHub:
+The QONTOS packages are not yet published to PyPI. Install from pinned release tags:
 
 ```bash
-pip install git+https://github.com/qontos/qontos.git@main
-pip install git+https://github.com/qontos/qontos-sim.git@main
+pip install git+https://github.com/qontos/qontos.git@v0.2.0
+pip install git+https://github.com/qontos/qontos-sim.git@v0.1.0
 ```
 
 Or install all example dependencies:
