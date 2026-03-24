@@ -21,6 +21,7 @@
     <a href="#overview">Overview</a> &middot;
     <a href="#start-here">Start Here</a> &middot;
     <a href="#installation">Installation</a> &middot;
+    <a href="docs/index.md">Docs Hub</a> &middot;
     <a href="#repository-map">Repository Map</a> &middot;
     <a href="#execution-modes">Execution Modes</a> &middot;
     <a href="#related-repositories">Related Repositories</a>
@@ -32,6 +33,8 @@
 ## Overview
 
 QONTOS Examples is the public adoption layer for the QONTOS stack. It turns the SDK, simulator, and benchmark concepts into runnable notebooks and scripts that show how the platform behaves in real workflows.
+
+Start with [docs/index.md](docs/index.md) for the lightweight docs hub and the fastest route into the learning paths.
 
 ## Start Here
 
