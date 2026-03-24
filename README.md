@@ -35,6 +35,7 @@
 QONTOS Examples is the public adoption layer for the QONTOS stack. It turns the SDK, simulator, and benchmark concepts into runnable notebooks and scripts that show how the platform behaves in real workflows.
 
 Start with [docs/index.md](docs/index.md) for the lightweight docs hub and the fastest route into the learning paths.
+For the canonical install and release policy across the public repos, use [the shared policy](https://github.com/qontos/.github/blob/main/docs/release-install-policy.md).
 
 ## Start Here
 

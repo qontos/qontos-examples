@@ -10,6 +10,7 @@ This page is the lightweight docs hub for `qontos-examples`. Use it to choose th
 | [Beginner notebooks](../notebooks/01_hello_qubit.ipynb) | first-run path for new users |
 | [Execution modes](../README.md#execution-modes) | tells you which examples work offline, require a server, or need credentials |
 | [Public Registry](https://github.com/qontos/.github/blob/main/docs/public-registry.md) | shared map across the public QONTOS ecosystem |
+| [Release & Install Policy](https://github.com/qontos/.github/blob/main/docs/release-install-policy.md) | canonical install and release guidance for the public QONTOS repos |
 
 ## Learning Paths
 
