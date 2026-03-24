@@ -36,7 +36,7 @@ QONTOS Examples is the public adoption layer for the QONTOS stack. It turns the 
 ## Start Here
 
 | Level | Resource | Description |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | Beginner | [Hello Qubit](notebooks/01_hello_qubit.ipynb) | First circuit submission and result inspection |
 | Beginner | [Bell State](notebooks/02_bell_state.ipynb) | Entanglement and measurement basics |
 | Intermediate | [Partitioning](notebooks/03_partitioning.ipynb) | Modular execution planning for larger circuits |
@@ -67,7 +67,7 @@ pip install -r requirements.txt
 ## Repository Map
 
 | Path | Purpose |
-| --- | --- |
+| :--- | :--- |
 | `notebooks/` | Guided notebook walkthroughs from beginner to advanced workflows |
 | `examples/python/` | Core SDK and proof-oriented scripts |
 | `examples/partitioning/` | Partitioning strategy examples and algorithm comparisons |
@@ -99,7 +99,7 @@ pip install -r requirements.txt
 ## Execution Modes
 
 | Example | Status | Requirements |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `circuit_normalization.py` | Works now | Offline |
 | `submit_job.py` | Works now | Local simulator |
 | `execution_proof.py` | Works now | Offline |
@@ -115,7 +115,7 @@ pip install -r requirements.txt
 ## Related Repositories
 
 | Repository | Role |
-| --- | --- |
+| :--- | :--- |
 | [qontos](https://github.com/qontos/qontos) | Flagship SDK and public developer entry point |
 | [qontos-sim](https://github.com/qontos/qontos-sim) | Simulators, digital twin, and tensor-network modeling |
 | [qontos-benchmarks](https://github.com/qontos/qontos-benchmarks) | Evidence and methodology for public claims |
